@@ -7861,7 +7861,7 @@ a.anchor-link {
         <span class="k">if</span> <span class="n">sudoku</span><span class="o">.</span><span class="n">solution</span><span class="o">.</span><span class="n">status</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'infeasible'</span><span class="p">,</span> <span class="s1">'unbounded'</span><span class="p">]:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">board</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
-    <span class="c1"># Random sudoku tries to match some random ones</span>
+    <span class="c1"># Minimizes solution's distance to some randomly strewn 1's</span>
     <span class="k">def</span> <span class="nf">random_ones</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_random</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
         <span class="n">random_ones</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_random</span><span class="p">):</span>
@@ -8128,7 +8128,7 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>There are probably more specific methods of learning constraints for linear programs solving discrete problems. Straightforward gradient descent on a continuous model might sort of be like wandering drunk at night in comparison to these methods. For example, if you were able to determine not only if a constraint makes a solution infeasible, but <em>how many solutions it excludes if it is feasible</em>, you'd be able to greedily optimize for constraints that maximize this number, <em>i.e. the constraints that have the most importance to the problem</em>. There's some <a href="https://arxiv.org/abs/2104.06407">recent work</a> related to this question, the volume of the set of solutions to a LP, that seems pretty interesting.</p>
-<p>Thanks for reading!</p>
+<p>I'll be trying to add a comments section soon, but if you'd like to discuss this post you can find my info on <a href="https://github.com/mxkopy">my github</a>. Thanks for reading!</p>
 </div>
 </div>
 </div>
