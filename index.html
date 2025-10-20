@@ -7588,7 +7588,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>We can generate completed sudokus like this by writing its rules as a set of constraints. The rules are that every row, column, and 3x3 square (what I've learned is called a 'chute') contains each number 1 through 9.</p>
+<p>We can generate completed sudokus like this by writing the rules as a set of constraints. The rules are that every row, column, and 3x3 square (what I've learned is called a 'chute') contains each number 1 through 9.</p>
 <p>It's a bit tricky to write constraints for these rules using a 9x9 grid. Instead, we'll use a one-hot encoding, as in the OptNet paper. This means we have a 9x9x9 tensor indexed by row, column, and digit: <code>board[row, col, digit]</code>. If we want to put a 1 in the top left corner of the board, we'd write <code>board[0, 0, 0] = 1</code>; and to put a 2 directly to the right of it we'd write <code>board[0, 1, 1] = 1</code>.</p>
 <p>The rule <code>each row has one of each digit</code> can be written in python-constraint form as <code>sum(board[row, :, digit]) == 1 for all rows &amp; digits</code>; for columns it'd be <code>sum(board[:, col, digit]) == 1 for all columns &amp; digits</code>. Since there's only one digit in each cell, we should also write <code>sum(board[row, column, :]) == 1 for all rows &amp; columns</code>.</p>
 </div>
