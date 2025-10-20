@@ -7524,7 +7524,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Learning-sudoku-by-doing-gradient-descent-on-a-linear-program">Learning sudoku by doing gradient descent on a linear program<a class="anchor-link" href="#Learning-sudoku-by-doing-gradient-descent-on-a-linear-program">¶</a></h1><p>"OptNet: Differentiable Optimization as a Layer in Neural Networks" (<a href="https://arxiv.org/pdf/1703.00443">arxiv</a>) describes a way to differentiate linear programs, which is an interesting thing one might think to do (I go into some detail about this in the <em>Results &amp; discussion</em> section at the end). <a href="https://github.com/cvxpy/cvxpylayers"><code>cvxpylayers</code></a> is a python package implementing their ideas using the <code>cvxpy</code> backend, and I'm going to try and use that implementation to train a model to learn how to play sudoku. You can download the Jupyter notebook with all the code I've written <a href="https://github.com/mxkopy/sudoku/blob/main/sudoku.ipynb">here</a>.</p>
+<h1 id="Learning-sudoku-by-doing-gradient-descent-on-a-linear-program">Learning sudoku by doing gradient descent on a linear program<a class="anchor-link" href="#Learning-sudoku-by-doing-gradient-descent-on-a-linear-program">¶</a></h1><p>"OptNet: Differentiable Optimization as a Layer in Neural Networks" (<a href="https://arxiv.org/pdf/1703.00443">arxiv</a>) describes a way to differentiate linear programs, which is an interesting thing one might think to do (I go into some detail about this in the <a href="#Results-&amp;-discussion">discussion section</a> towards the end). <a href="https://github.com/cvxpy/cvxpylayers"><code>cvxpylayers</code></a> is a python package implementing their ideas using the <code>cvxpy</code> backend, and I'm going to try and use that implementation to train a model to learn how to play sudoku. You can download the Jupyter notebook with all the code I've written <a href="https://github.com/mxkopy/sudoku/blob/main/sudoku.ipynb">here</a>.</p>
 <h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">¶</a></h2>
 
 <p>
@@ -7814,7 +7814,7 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>Hopefully this should convince you that linear programs have some powerful reasoning/AI potential. They seem to implement set logic, where sets are defined <em>descriptively</em> by a set of constraints. We can test whether something is in a set, whether the set is empty, (sometimes if we're creative enough) if it's in the complement, and so forth. But we don't do this by comparing set-elements; instead we use the set's <em>definition</em> (or 'properties', loosely speaking).</p>
-<p>To drive this point further, I've made a function that generates sudokus uniquely defined by hints of a certain size. It works from the fact that to completely specify a cell, at least 8 numbers need to be among its rows, column, and chute.</p>
+<p>To drive this point further, I've made a linear program that generates sudokus uniquely defined by hints of a certain size. It works from the fact if a cell has 8 other numbers among its row, column, and/or chute, then it has only one solution.</p>
 </div>
 </div>
 </div>
