@@ -7549,6 +7549,7 @@ a.anchor-link {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">cvxpy</span> <span class="kn">as</span> <span class="n">cvx</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="n">np</span>
 
 <span class="c1"># Set up output variables</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">cvx</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -7675,8 +7676,7 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [70]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="n">np</span>
-
+<div class="highlight hl-ipython3"><pre>
 <span class="c1"># Set initial row to be 1 -&gt; 9</span>
 <span class="nb">input</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
 <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
@@ -7837,10 +7837,7 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
-
-<span class="k">class</span> <span class="nc">Sudoku</span><span class="p">:</span>
-
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Sudoku</span><span class="p">:</span>
     <span class="c1"># Makes a sudoku uniquely defined by a hint of size n</span>
     <span class="k">def</span> <span class="nf">unique_hint_of_length_n</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
         <span class="n">minimum_hint</span> <span class="o">=</span> <span class="n">cvx</span><span class="o">.</span><span class="n">Variable</span><span class="p">((</span><span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="n">boolean</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -7867,6 +7864,7 @@ a.anchor-link {
         <span class="bp">self</span><span class="o">.</span><span class="n">make_objective</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">cvx</span><span class="o">.</span><span class="n">Minimize</span><span class="p">(</span><span class="n">cvx</span><span class="o">.</span><span class="n">sum_squares</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">board</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">random_ones</span><span class="p">()))</span>
 
     <span class="k">def</span> <span class="nf">complete_solution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hint</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
         <span class="n">hint_ct</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">board</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">]</span> <span class="o">==</span> <span class="n">hint</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">),</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> <span class="k">if</span> <span class="n">hint</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
         <span class="n">sudoku</span> <span class="o">=</span> <span class="n">cvx</span><span class="o">.</span><span class="n">Problem</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">make_objective</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">constraints</span> <span class="o">+</span> <span class="n">hint_ct</span><span class="p">)</span>
         <span class="n">sudoku</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
@@ -7925,7 +7923,7 @@ a.anchor-link {
 </p>
 <p><code>cvxpylayers</code> gives us this ability by putting an LP solver into a neural network layer. It's counterintuitive as to what exactly that would entail, since linear programs aren't usually represented as functions with inputs and outputs. Generally, the inputs to a linear program are an objective function we want to minimize $f(x)$ and some functions representing constraints in the form $g(x) \leq 0$ or $h(x) = 0$. The output is an optimal solution $x_{\text{opt}}$ minimizing $f$ under $g, h$. It turns out that under mild assumptions, whether $x$ is optimal depends on the derivatives of $f$, $g$, and $h$; and so perhaps some <a href="https://arxiv.org/pdf/1703.00443">talented mathematicians</a> can figure out the derivative of $x_{\text{opt}}$ from $f'$, $g'$, and $h'$.</p>
 <p>Appreciating this result, we can train a model to solve incomplete sudokus as in the OptNet paper (this one is larger >:)). As a linear program, it tries to complete a hint by finding a solution closest to it under learned constraints; as a neural network it updates these constraints using the error between the completed hint and the actual solution.</p>
-<p>A sort of brute force way to approach this is to learn $g$ and $h$ as rules in the form of a <code>(9*9*9)^2</code> tensor relating every cell to a possible game state. This is actually not too big of a number for modern hardware and is an ideal approach, since we might accidentally cheat and encode some prior information about the game trying to be more efficient. Unfortunately, <a href="https://www.cvxpy.org/index.html"><code>cvxpy</code></a> doesn't seem to be able to handle matrices with <code>(9*9*9)^2</code> floats, so I've devised a way of splitting up the workload among multiple layers in parallel. This probably has to do with the fact that <code>cvxpy</code> is actually a <a href="https://www.cvxpy.org/api_reference/cvxpy.reductions.html">compiler</a> and the IR isn't lowered super far down into machine code.</p>
+<p>A sort of brute force way to approach this is to learn $g$ and $h$ as rules in the form of a $(9 \cdot 9 \cdot 9)^2$ tensor relating every cell to a possible game state. This is actually not too big of a number for modern hardware and is an ideal approach, since we might accidentally cheat and encode some prior information about the game trying to be more efficient. Unfortunately, <a href="https://www.cvxpy.org/index.html"><code>cvxpy</code></a> doesn't seem to be able to handle matrices with $(9 \cdot 9 \cdot 9)^2$ floats, so I've devised a way of splitting up the workload among multiple layers in parallel. This probably has to do with the fact that <code>cvxpy</code> is actually a <a href="https://www.cvxpy.org/api_reference/cvxpy.reductions.html">compiler</a> and the IR isn't lowered super far down into machine code.</p>
 </div>
 </div>
 </div>
