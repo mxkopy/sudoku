@@ -7592,7 +7592,16 @@ a.anchor-link {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>For things that can be totally defined by a set of rules, this is very useful. For example, we don't need to know anything apart from the rules of sudoku to make, complete, or verify a puzzle. By writing the rules as a set of constraints, we can use linear programming to do this naturally. The rules are that every row, column, and 3x3 square (what I've learned is called a 'chute') contains each number 1 through 9.</p>
 <p>It's a bit tricky to do this using a 9x9 grid. Instead, I'll use a one-hot encoding, as in the OptNet paper. This means we have a 9x9x9 tensor indexed by row, column, and digit: <code>board[row, col, digit]</code>. If we want to put a 1 in the top left corner of the board, we'd write <code>board[0, 0, 0] = 1</code>; and to put a 2 directly to the right of it we'd write <code>board[0, 1, 1] = 1</code>.</p>
-<p>The rule <code>each row has one of each digit</code> can be written in python-constraint form as <code>sum(board[row, :, digit]) == 1 for all rows &amp; digits</code>; for columns it'd be <code>sum(board[:, col, digit]) == 1 for all columns &amp; digits</code>. Since there's only one digit in each cell, we should also write <code>sum(board[row, column, :]) == 1 for all rows &amp; columns</code>.</p>
+<p>The rule 'each row has one of each digit' can be written in python-constraint form as </p>
+    <p><code>sum(board[row, :, digit]) == 1 for all rows &amp; digits</code>;</p>
+
+</p>for columns it'd be</p> 
+
+    <p><code>sum(board[:, col, digit]) == 1 for all columns &amp; digits</code>. </p>
+
+<p>Since there's only one digit in each cell, we should also write</p>
+
+<p><code>sum(board[row, column, :]) == 1 for all rows &amp; columns</code>.</p>
 </div>
 </div>
 </div>
@@ -7713,7 +7722,7 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>Linear programming (and constraint programming in general) seems to provide some powerful tools related to reasoning. By being creative with constraints, one can prove statements about sudoku to be true, or otherwise find a counterexample. Add a constraint that describes the set of counterexamples, then try to solve the resulting problem -- if's it's infeasible, there aren't any counterexamples and the statement is true; if it's feasible then any solution is a counterexample.</p>
-<p>Consider the statement <code>a diagonal (starting at the top left) of a sudoku board has less than six unique numbers</code>. The diagonal has to have at least three unique numbers since a chute has to have a repeat otherwise, but arguments going the other way don't seem as straightforward.</p>
+<p>Consider the statement 'a diagonal (starting at the top left) of a sudoku board has less than six unique numbers'. The diagonal has to have at least three unique numbers since a chute has to have a repeat otherwise, but arguments going the other way don't seem as straightforward.</p>
 <p>I'll test this statement by trying to find a counterexample, e.g. a sudoku with six numbers present and three missing on the diagonal. The particular numbers don't matter, so we can just pick 1 -&gt; 6 and 7 -&gt; 9 respectively. Then the counterexample-constraint should ensure that digits 1 -&gt; 6 contain at least one entry on the diagonal, and digits 7 -&gt; 9 contain none.</p>
 </div>
 </div>
@@ -7818,7 +7827,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Hopefully this should convince you that linear programs have some powerful reasoning/AI potential. They seem to implement set logic, where sets are defined <em>descriptively</em> by a set of constraints. We can test whether something is in a set, whether the set is empty, (sometimes if we're creative enough) if it's in the complement, and so forth. But we don't do this by comparing set-elements; instead we use the set's <em>definition</em> (or 'properties', loosely speaking). On one hand, this might limit the applicability of this sort of method to situations where thinking about sets is useful, but on the other hand, those situations often involve precise logical reasoning.</p>
+<p>Hopefully this should convince you that linear programs have some powerful reasoning/AI potential. They seem to implement set logic, where sets are defined <em>descriptively</em> by a set of constraints. We can test whether something is in a set, whether a set is empty, (sometimes if we're creative enough) if it's in the complement, and so forth. But we don't do this by comparing set-elements; instead we use the set's <em>definition</em> (or 'properties', loosely speaking). On one hand, this might limit the applicability of this sort of method to situations where thinking about sets is useful, but on the other hand, those situations often involve precise logical reasoning.</p>
 <p>To drive this point further, I've made a linear program for finding hints with solutions that are guaranteed to be unique. The constraint for 'uniqueness' used here requires that each cell in the hint has 8 digits given among its row, column, and/or chute (i.e. each cell has a unique solution).</p>
 </div>
 </div>
