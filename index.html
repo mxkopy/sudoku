@@ -7723,7 +7723,7 @@ a.anchor-link {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>Linear programming (and constraint programming in general) seems to provide some powerful tools related to reasoning. By being creative with constraints, one can prove statements about sudoku to be true, or otherwise find a counterexample. Add a constraint that describes the set of counterexamples, then try to solve the resulting problem <a title="By the way, I've been using em-dashes for so many years before ChatGPT. Was I tapped into something objectively good, or was I making AI slop so many years ago? This question plagues me.">--</a> if it's infeasible, there aren't any counterexamples and the statement is true; if it's feasible then any solution is a counterexample.</p>
 <p>Consider the statement 'every diagonal (starting at the top left) of a sudoku board has less than six unique digits'. As a sort of example, we know the diagonal has to have at least three unique digits since a chute will have a repeat otherwise.</p>
-<p>One counterexample would be a sudoku with six numbers present and three missing on the diagonal. The particular numbers don't matter, so we can just pick 1 -&gt; 6 and 7 -&gt; 9 respectively. Then the counterexample constraint should be that digits 1 -&gt; 6 contain at least one entry on the diagonal, and digits 7 -&gt; 9 contain none.</p>
+<p>One counterexample would be a sudoku with six digits present and three missing on the diagonal. The particular numbers don't matter, so we can just pick 1 -&gt; 6 and 7 -&gt; 9 respectively. Then the counterexample constraint should be that digits 1 -&gt; 6 contain at least one entry on the diagonal, and digits 7 -&gt; 9 contain none.</p>
 </div>
 </div>
 </div>
@@ -7735,7 +7735,7 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Counterexample - a diagonal with exactly six unique numbers</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Counterexample - a diagonal with exactly six unique digits</span>
 <span class="n">diagonal_example_ct_1</span> <span class="o">=</span> <span class="p">[</span><span class="n">cvx</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">board</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">d</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">)])</span> <span class="o">&gt;=</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">)]</span>
 <span class="n">diagonal_example_ct_2</span> <span class="o">=</span> <span class="p">[</span><span class="n">cvx</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">board</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">d</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">)])</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">)]</span>
 <span class="n">cvx</span><span class="o">.</span><span class="n">Problem</span><span class="p">(</span><span class="n">cvx</span><span class="o">.</span><span class="n">Minimize</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">constraints</span> <span class="o">+</span> <span class="n">diagonal_example_ct_1</span> <span class="o">+</span> <span class="n">diagonal_example_ct_2</span><span class="p">)</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
@@ -7773,7 +7773,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>The statement is false, since here's a valid sudoku with numbers 1 -&gt; 6 on the diagonal. In fact, a diagonal can have any number of unique digits $\geq$ three.</p>
+<p>The statement's false, since here's a valid sudoku with numbers 1 -&gt; 6 on the diagonal. In fact, a diagonal can have any number of unique digits $\geq$ three.</p>
 </div>
 </div>
 </div>
