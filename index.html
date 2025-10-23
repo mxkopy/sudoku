@@ -7592,7 +7592,7 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>For things that can be totally defined by a set of rules, this is very useful. For example, we don't need to know anything apart from the rules of sudoku to make, complete, or verify a puzzle. By writing the rules as a set of constraints, we can use linear programming to do this naturally. The rules are that every row, column, and 3x3 square (what I've learned is called a 'chute') contains each number 1 through 9.</p>
-<p>It's a bit tricky to do this using a 9x9 grid. Instead, I'll use a one-hot encoding, as in the OptNet paper. This means we have a 9x9x9 tensor indexed by row, column, and digit: <code>board[row, col, digit]</code>. If we want to put a 1 in the top left corner of the board, we'd write <code>board[0, 0, 0] = 1</code>; and to put a 2 directly to the right of it we'd write <code>board[0, 1, 1] = 1</code>.</p>
+<p>It's a bit tricky to do this using a 9x9 grid. Instead, I'll use a one-hot encoding, as in the OptNet paper. This means we have a 9x9x9 tensor indexed by row, column, and digit: <code>board[row, col, digit]</code>. If we want to put a 1 in the top left corner of the board, we'd write <code>board[0, 0, 0] = 1</code>, and to put a 2 directly to the right of it we'd write <code>board[0, 1, 1] = 1</code>.</p>
 <p>The rule 'each row has one of each digit' can be written in python-constraint form as </p>
     <p><code>sum(board[row, :, digit]) == 1 for all rows &amp; digits</code>;</p>
 
