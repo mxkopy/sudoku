@@ -7525,9 +7525,11 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Learning-sudoku-by-doing-gradient-descent-on-a-linear-program">Learning sudoku by doing gradient descent on a linear program<a class="anchor-link" href="#Learning-sudoku-by-doing-gradient-descent-on-a-linear-program">¶</a></h1><p>"OptNet: Differentiable Optimization as a Layer in Neural Networks" (<a href="https://arxiv.org/pdf/1703.00443">arxiv</a>) describes a way to differentiate linear programs, <a href="#Results-&amp;-discussion">which is an interesting thing one might think to do</a>. <a href="https://github.com/cvxpy/cvxpylayers"><code>cvxpylayers</code></a> is a python package implementing their ideas using the <code>cvxpy</code> backend, and I'm going to try and use that implementation to train a model to learn sudoku. You can download the Jupyter notebook <a href="https://github.com/mxkopy/sudoku/blob/main/sudoku.ipynb">here</a>, which includes a bunch of printing/visualization code that I've left out.</p>
+<h1 id="Learning-sudoku-by-doing-gradient-descent-on-a-linear-program">Learning sudoku by doing gradient descent on a linear program<a class="anchor-link" href="#Learning-sudoku-by-doing-gradient-descent-on-a-linear-program">¶</a></h1><p><a href="https://arxiv.org/pdf/1703.00443">"OptNet: Differentiable Optimization as a Layer in Neural Networks"</a> describes a way to differentiate linear programs, <a href="#Results-&amp;-discussion">which is an interesting thing one might think to do</a>. <a href="https://github.com/cvxpy/cvxpylayers"><code>cvxpylayers</code></a> is a python package implementing their ideas using the <code>cvxpy</code> backend, and I'm going to try and use that implementation to train a model to learn sudoku. You can download the Jupyter notebook <a href="https://github.com/mxkopy/sudoku/blob/main/sudoku.ipynb">here</a>, which includes a bunch of printing/visualization code that I've left out.</p>
 <h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">¶</a></h2>
-
+<p>
+    The general motivation and background for this topic is summarized <a href="https://en.wikipedia.org/wiki/Constrained_conditional_model">here</a>, with the "Integer linear programming for natural language processing applications" section being especially relevant. 
+</p>
 <p>
     Constraint programming lets you find the optimal values of a function under some constraints. In general, we specfiy the dependent/output <em>variables</em> we're solving for, an <em>objective</em> function we'd like to minimize or maximize, and the <em>constraints</em> that define the set of solutions; then we call a solver to do math we don't understand. If there are no solutions, the LP is <em>infeasible</em>, and if there are infinite solutions, the LP is <em>unbounded</em>. <a href="https://www.zib.de/userpage/groetschel/pubnew/paper/groetschellovaszschrijver1988.pdf">There's a lot of good theory behind this stuff</a> but practically, a solver will give you a solution or throw an error if your problem is malformed, infeasible, or unbounded.
 </p>
@@ -7817,7 +7819,7 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>Hopefully this should convince you that linear programs have some powerful reasoning/AI potential. They seem to implement set logic, where sets are defined <em>descriptively</em> by a set of constraints. We can test whether something is in a set, whether the set is empty, (sometimes if we're creative enough) if it's in the complement, and so forth. But we don't do this by comparing set-elements; instead we use the set's <em>definition</em> (or 'properties', loosely speaking).</p>
-<p>To drive this point further, I've made a linear program that generates sudokus uniquely defined by hints of a certain size. Here 'unique' means each cell has 8 other numbers among its row, column, and/or chute, i.e. has only one solution.</p>
+<p>To drive this point further, I've made a linear program that generates hints with solutions that are guaranteed to be unique. We can do this by requiring that each cell in the hint has 8 other digits specified among its row, column, and/or chute (i.e. has only one solution).</p>
 </div>
 </div>
 </div>
